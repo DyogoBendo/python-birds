@@ -12,7 +12,7 @@ from atores import PassaroVermelho, PassaroAmarelo, Porco, Obstaculo
 ALTURA_DA_TELA = 600  # px
 
 root = Tk()
-
+ 
 IMAGES_PATH = path.dirname(__file__)
 IMAGES_PATH = path.join(IMAGES_PATH, 'images')
 PASSARO_VERMELHO = PhotoImage(file=path.join(IMAGES_PATH, "passaro_vermelho.gif"))
