@@ -23,6 +23,12 @@ class Ponto():
     def __repr__(self, *args, **kwargs):
         return "Ponto(%s,%s,'%s')" % (self.x, self.y, self.caracter)
 
+def existe_algum_ator_ativo(atores):
+    for ator in atores:
+        if ator.status == ATIVO:
+            return True
+
+    return False
 
 class Fase():
     def __init__(self, intervalo_de_colisao=1):
@@ -74,6 +80,11 @@ class Fase():
 
         :return:
         """
+        if not existe_algum_ator_ativo(self._porcos):
+            return VITORIA
+        if not existe_algum_ator_ativo(self._passaros):
+            return DERROTA
+            
         return EM_ANDAMENTO
 
     def lancar(self, angulo, tempo):
@@ -108,7 +119,7 @@ class Fase():
             passaro.calcular_posicao(tempo)
             for obstaculo_porco in self._obstaculos + self._porcos:
                 passaro.colidir(obstaculo_porco, self.intervalo_de_colisao)
-
+                passaro.colidir_com_chao()
         pontos=[self._transformar_em_ponto(a) for a in self._passaros+self._obstaculos+self._porcos]
 
         return pontos
